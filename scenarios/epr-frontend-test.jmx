@@ -8,7 +8,7 @@
     </TestPlan>
     <hashTree>
       <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Thread Group">
-        <intProp name="ThreadGroup.num_threads">10</intProp>
+        <intProp name="ThreadGroup.num_threads">15</intProp>
         <intProp name="ThreadGroup.ramp_time">1</intProp>
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
@@ -349,31 +349,57 @@ vars.put(&quot;uploaded_status&quot;, &quot;NOT_FOUND&quot;)</stringProp>
           </JSR223PostProcessor>
           <hashTree/>
         </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="EPR Summary Log upload submission page">
+          <stringProp name="TestPlan.comments">EPR Summary Log upload submission page</stringProp>
+          <stringProp name="HTTPSampler.domain">${EPR_FRONTEND_HOST}</stringProp>
+          <stringProp name="HTTPSampler.port">${EPR_FRONTEND_PORT}</stringProp>
+          <stringProp name="HTTPSampler.protocol">${HTTP_PROTOCOL}</stringProp>
+          <stringProp name="HTTPSampler.path">${redirect_path}/submit</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="crumb" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">true</boolProp>
+                <stringProp name="Argument.value">${crumb_value}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+                <boolProp name="HTTPArgument.use_equals">true</boolProp>
+                <stringProp name="Argument.name">crumb</stringProp>
+                <stringProp name="HTTPArgument.content_type">application/x-www-form-urlencoded</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion">
+            <collectionProp name="Asserion.test_strings">
+              <stringProp name="49586">200</stringProp>
+            </collectionProp>
+            <stringProp name="Assertion.custom_message"></stringProp>
+            <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+            <boolProp name="Assertion.assume_success">false</boolProp>
+            <intProp name="Assertion.test_type">2</intProp>
+          </ResponseAssertion>
+          <hashTree/>
+        </hashTree>
         <WhileController guiclass="WhileControllerGui" testclass="WhileController" testname="Poll Summary Log Submission Page">
           <stringProp name="WhileController.condition">${__groovy(vars.get(&quot;uploaded_status&quot;).equals(&quot;NOT_FOUND&quot;) &amp;&amp; vars.getObject(&quot;submission_poll_count&quot;).toInteger() &lt; 20)}</stringProp>
         </WhileController>
         <hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="EPR Summary Log upload submission page">
-            <stringProp name="TestPlan.comments">EPR Summary Log upload submission page</stringProp>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="EPR Summary Log submission confirmation page">
+            <stringProp name="TestPlan.comments">EPR Summary Log submission confirmation page</stringProp>
             <stringProp name="HTTPSampler.domain">${EPR_FRONTEND_HOST}</stringProp>
             <stringProp name="HTTPSampler.port">${EPR_FRONTEND_PORT}</stringProp>
             <stringProp name="HTTPSampler.protocol">${HTTP_PROTOCOL}</stringProp>
-            <stringProp name="HTTPSampler.path">${redirect_path}/submit</stringProp>
+            <stringProp name="HTTPSampler.path">${redirect_path}</stringProp>
             <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-            <stringProp name="HTTPSampler.method">POST</stringProp>
+            <stringProp name="HTTPSampler.method">GET</stringProp>
             <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
             <boolProp name="HTTPSampler.postBodyRaw">false</boolProp>
             <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
-              <collectionProp name="Arguments.arguments">
-                <elementProp name="crumb" elementType="HTTPArgument">
-                  <boolProp name="HTTPArgument.always_encode">true</boolProp>
-                  <stringProp name="Argument.value">${crumb_value}</stringProp>
-                  <stringProp name="Argument.metadata">=</stringProp>
-                  <boolProp name="HTTPArgument.use_equals">true</boolProp>
-                  <stringProp name="Argument.name">crumb</stringProp>
-                  <stringProp name="HTTPArgument.content_type">application/x-www-form-urlencoded</stringProp>
-                </elementProp>
-              </collectionProp>
+              <collectionProp name="Arguments.arguments"/>
             </elementProp>
           </HTTPSamplerProxy>
           <hashTree>
@@ -390,7 +416,7 @@ vars.put(&quot;uploaded_status&quot;, &quot;NOT_FOUND&quot;)</stringProp>
             <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Regular Expression Extractor">
               <stringProp name="RegexExtractor.useHeaders">false</stringProp>
               <stringProp name="RegexExtractor.refname">uploaded_status</stringProp>
-              <stringProp name="RegexExtractor.regex">Summary log uploaded</stringProp>
+              <stringProp name="RegexExtractor.regex">&lt;title&gt;Summary log uploaded \| ([^&lt;]+)&lt;/title&gt;</stringProp>
               <stringProp name="RegexExtractor.template">$0$</stringProp>
               <stringProp name="RegexExtractor.default">NOT_FOUND</stringProp>
               <boolProp name="RegexExtractor.default_empty_value">false</boolProp>
