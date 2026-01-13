@@ -1,4 +1,4 @@
-organisationId,registrationId,userOrgId,userEmail,userFirstName,userLastName,filename
+orgId,regId,userOrgId,userEmail,userFirstName,userLastName,filename
 6507f1f77bcf86cd79943911,6507f1f77bcf86cd79943912,2dee1e31-5ac6-4bc4-8fe0-0820f710c2b1,alice.smith@ecorecycle.com,Alice,Smith,alicesmith.xlsx
 695533579f1629bbaf096041,69553358f2f4456f18a5c313,0b5fdb3f-9a23-4126-805e-6de86b78c1fa,muhammad.watson99@morefaketesting.co.uk,Muhammad,Watson,muhammadwatson.xlsx
 69553358f2f4456f18a5c310,69553358d573cd974fe7c151,1bd25f11-eb34-40f6-86d3-21a5e0fc3bfe,archie.jackson54@defraperftest.com,Archie,Jackson,archiejackson.xlsx
