@@ -1608,6 +1608,19 @@ vars.put(&quot;userOrgId&quot;, userOrgId);
               <stringProp name="Scope.variable"></stringProp>
             </JSONPostProcessor>
             <hashTree/>
+            <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="Track orgId for cleanup" enabled="true">
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="script">def orgId = vars.get(&quot;orgId&quot;)
+if (orgId) {
+    def dir = new File(&quot;/opt/perftest/test-artifacts&quot;)
+    if (!dir.exists()) dir.mkdirs()
+    new File(&quot;/opt/perftest/test-artifacts/created-org-ids.txt&quot;).append(orgId + &quot;\n&quot;)
+}</stringProp>
+              <stringProp name="scriptLanguage">groovy</stringProp>
+            </JSR223PostProcessor>
+            <hashTree/>
           </hashTree>
           <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Registration Details HTTP Request" enabled="true">
             <stringProp name="HTTPSampler.domain">${EPR_BACKEND_HOST}</stringProp>
