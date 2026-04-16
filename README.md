@@ -29,7 +29,7 @@ This will launch the required services for local testing.
 
 ### Run performance tests
 
-Download [JMeter](https://jmeter.apache.org/download_jmeter.cgi) and launch the JMeter GUI. Load the `epr-backend-test.jmx` file from this repository into JMeter.
+Download [JMeter](https://jmeter.apache.org/download_jmeter.cgi) and launch the JMeter GUI. Load the `epr-frontend-test.jmx` file from this repository into JMeter.
 
 Enable "Local User Defined Variables" and disable "Environment User Defined Variables" to run the tests. Ensure to disable "Local User Defined Variables" and re-enable "Environment User Defined Variables" when you are done..
 
