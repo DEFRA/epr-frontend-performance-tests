@@ -245,11 +245,11 @@ vars.put(&quot;userOrgId&quot;, userOrgId);
           </JSONPostProcessor>
           <hashTree/>
         </hashTree>
-        <CriticalSectionController guiclass="CriticalSectionControllerGui" testclass="CriticalSectionController" testname="Form Submission Controller">
+        <CriticalSectionController guiclass="CriticalSectionControllerGui" testclass="CriticalSectionController" testname="Form Submission Controller" enabled="true">
           <stringProp name="CriticalSectionController.lockName">global_lock</stringProp>
         </CriticalSectionController>
         <hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Organisation Details HTTP Request">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Organisation Details HTTP Request" enabled="true">
             <stringProp name="HTTPSampler.domain">${EPR_BACKEND_HOST}</stringProp>
             <stringProp name="HTTPSampler.port">${EPR_BACKEND_PORT}</stringProp>
             <stringProp name="HTTPSampler.protocol">${HTTP_PROTOCOL}</stringProp>
@@ -4834,7 +4834,7 @@ vars.put(&quot;userOrgId&quot;, userOrgId);
             </ResponseAssertion>
             <hashTree/>
           </hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Accreditation Details HTTP Request">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Accreditation Details HTTP Request" enabled="true">
             <stringProp name="HTTPSampler.domain">${EPR_BACKEND_HOST}</stringProp>
             <stringProp name="HTTPSampler.port">${EPR_BACKEND_PORT}</stringProp>
             <stringProp name="HTTPSampler.protocol">${HTTP_PROTOCOL}</stringProp>
@@ -5730,7 +5730,7 @@ vars.put(&quot;userOrgId&quot;, userOrgId);
               </collectionProp>
             </HeaderManager>
             <hashTree/>
-            <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion">
+            <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
               <collectionProp name="Asserion.test_strings">
                 <stringProp name="49587">201</stringProp>
               </collectionProp>
@@ -5741,7 +5741,7 @@ vars.put(&quot;userOrgId&quot;, userOrgId);
             </ResponseAssertion>
             <hashTree/>
           </hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Migrate Organisation HTTP Request">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Migrate Organisation HTTP Request" enabled="true">
             <stringProp name="HTTPSampler.domain">${EPR_BACKEND_HOST}</stringProp>
             <stringProp name="HTTPSampler.port">${EPR_BACKEND_PORT}</stringProp>
             <stringProp name="HTTPSampler.protocol">${HTTP_PROTOCOL}</stringProp>
@@ -5779,7 +5779,7 @@ vars.put(&quot;userOrgId&quot;, userOrgId);
             </ResponseAssertion>
             <hashTree/>
           </hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Get Organisation HTTP Request">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Get Organisation HTTP Request" enabled="true">
             <stringProp name="HTTPSampler.domain">${EPR_BACKEND_HOST}</stringProp>
             <stringProp name="HTTPSampler.port">${EPR_BACKEND_PORT}</stringProp>
             <stringProp name="HTTPSampler.protocol">${HTTP_PROTOCOL}</stringProp>
@@ -5822,7 +5822,7 @@ vars.put(&quot;userOrgId&quot;, userOrgId);
               <stringProp name="JSONPostProcessor.match_numbers"></stringProp>
             </JSONPostProcessor>
             <hashTree/>
-            <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="accreditationId JSON Extractor">
+            <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="accreditationId JSON Extractor" enabled="true">
               <stringProp name="JSONPostProcessor.referenceNames">accreditationId</stringProp>
               <stringProp name="JSONPostProcessor.jsonPathExprs">$.accreditations[0].id</stringProp>
               <stringProp name="JSONPostProcessor.match_numbers"></stringProp>
@@ -5834,14 +5834,22 @@ vars.put(&quot;userOrgId&quot;, userOrgId);
               <stringProp name="JSONPostProcessor.match_numbers"></stringProp>
             </JSONPostProcessor>
             <hashTree/>
+            <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="JSR223 PostProcessor" enabled="true">
+              <stringProp name="scriptLanguage">groovy</stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="script">vars.put(&quot;jsonPayload&quot;, prev.getResponseDataAsString())</stringProp>
+            </JSR223PostProcessor>
+            <hashTree/>
           </hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Patch Organisations HTTP Request" enabled="true">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="PUT Organisations HTTP Request" enabled="true">
             <stringProp name="HTTPSampler.domain">${EPR_BACKEND_HOST}</stringProp>
             <stringProp name="HTTPSampler.port">${EPR_BACKEND_PORT}</stringProp>
             <stringProp name="HTTPSampler.protocol">${HTTP_PROTOCOL}</stringProp>
             <stringProp name="HTTPSampler.path">/v1/dev/organisations/${refNo}</stringProp>
             <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
-            <stringProp name="HTTPSampler.method">PATCH</stringProp>
+            <stringProp name="HTTPSampler.method">PUT</stringProp>
             <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
             <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
             <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
@@ -5849,40 +5857,9 @@ vars.put(&quot;userOrgId&quot;, userOrgId);
                 <elementProp name="" elementType="HTTPArgument">
                   <boolProp name="HTTPArgument.always_encode">false</boolProp>
                   <stringProp name="Argument.value">{&#xd;
-    &quot;organisation&quot;: {&#xd;
-        &quot;registrations&quot;: [&#xd;
-            {&#xd;
-                &quot;id&quot;: &quot;${registrationId}&quot;,&#xd;
-                &quot;status&quot;: &quot;approved&quot;,&#xd;
-                &quot;validFrom&quot;: &quot;2026-01-01&quot;,&#xd;
-                &quot;validTo&quot;: &quot;2029-01-01&quot;,&#xd;
-                &quot;registrationNumber&quot;: &quot;R25SR500050912GO&quot;,&#xd;
-                &quot;accreditationId&quot;: &quot;${accreditationId}&quot;,&#xd;
-                &quot;glassRecyclingProcess&quot;: [&#xd;
-                    &quot;glass_other&quot;&#xd;
-                ],&#xd;
-                &quot;reprocessingType&quot;: &quot;input&quot;&#xd;
-            }&#xd;
-        ],&#xd;
-        &quot;accreditations&quot;: [&#xd;
-            {&#xd;
-                &quot;id&quot;: &quot;${accreditationId}&quot;,&#xd;
-                &quot;status&quot;: &quot;approved&quot;,&#xd;
-                &quot;validFrom&quot;: &quot;2026-01-01&quot;,&#xd;
-                &quot;validTo&quot;: &quot;2029-01-01&quot;,&#xd;
-                &quot;accreditationNumber&quot;: &quot;ACC5066791GO&quot;,&#xd;
-                &quot;glassRecyclingProcess&quot;: [&#xd;
-                    &quot;glass_other&quot;&#xd;
-                ],&#xd;
-                &quot;reprocessingType&quot;: &quot;input&quot;&#xd;
-            }&#xd;
-        ],&#xd;
-        &quot;submitterContactDetails&quot;: {&#xd;
-            &quot;email&quot;: &quot;${email}&quot;&#xd;
-        },&#xd;
-        &quot;status&quot;: &quot;approved&quot;&#xd;
-    }&#xd;
-}</stringProp>
+	&quot;organisation&quot;: ${modifiedPayload}&#xd;
+}&#xd;
+</stringProp>
                   <stringProp name="Argument.metadata">=</stringProp>
                 </elementProp>
               </collectionProp>
@@ -5897,6 +5874,44 @@ vars.put(&quot;userOrgId&quot;, userOrgId);
                 </elementProp>
               </collectionProp>
             </HeaderManager>
+            <hashTree/>
+            <JSR223PreProcessor guiclass="TestBeanGUI" testclass="JSR223PreProcessor" testname="JSR223 PreProcessor" enabled="true">
+              <stringProp name="cacheKey">true</stringProp>
+              <stringProp name="filename"></stringProp>
+              <stringProp name="parameters"></stringProp>
+              <stringProp name="script">import groovy.json.JsonSlurper
+import groovy.json.JsonOutput
+
+// Parse the stored JSON
+def jsonSlurper = new JsonSlurper()
+def payload = jsonSlurper.parseText(vars.get(&quot;jsonPayload&quot;))
+
+payload.registrations[0].id = &quot;${registrationId}&quot;
+payload.registrations[0].validFrom = &quot;2026-01-01&quot;
+payload.registrations[0].validTo = &quot;2029-01-01&quot;
+payload.registrations[0].registrationNumber = &quot;R25SR500050912GO&quot;
+payload.registrations[0].reprocessingType = &quot;input&quot;
+payload.registrations[0].status = &quot;approved&quot;
+payload.registrations[0].statusHistory.add([status: &quot;approved&quot;, updatedAt: &quot;2026-01-01&quot;])
+
+
+payload.accreditations[0].id = &quot;${accreditationId}&quot;
+payload.accreditations[0].validFrom = &quot;2026-01-01&quot;
+payload.accreditations[0].validTo = &quot;2029-01-01&quot;
+payload.accreditations[0].accreditationNumber = &quot;ACC5066791GO&quot;
+payload.accreditations[0].reprocessingType = &quot;input&quot;
+payload.accreditations[0].status = &quot;approved&quot;
+payload.accreditations[0].statusHistory.add([status: &quot;approved&quot;, updatedAt: &quot;2026-01-01&quot;])
+
+payload.submitterContactDetails.email = &quot;${email}&quot;
+payload.statusHistory.add([status: &quot;approved&quot;, updatedAt: &quot;2026-01-01&quot;])
+payload.status = &quot;approved&quot;
+
+
+// Convert back to JSON string and store it
+vars.put(&quot;modifiedPayload&quot;, JsonOutput.toJson(payload))</stringProp>
+              <stringProp name="scriptLanguage">groovy</stringProp>
+            </JSR223PreProcessor>
             <hashTree/>
             <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
               <collectionProp name="Asserion.test_strings">
@@ -6160,7 +6175,7 @@ log.info(&quot;Crumb value: ${crumbValue}&quot;)</stringProp>
           </JSR223PostProcessor>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="EPR Linking Page">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="EPR Linking Page" enabled="true">
           <stringProp name="HTTPSampler.domain">${EPR_FRONTEND_HOST}</stringProp>
           <stringProp name="HTTPSampler.port">${EPR_FRONTEND_PORT}</stringProp>
           <stringProp name="HTTPSampler.protocol">${HTTP_PROTOCOL}</stringProp>
@@ -6191,7 +6206,7 @@ log.info(&quot;Crumb value: ${crumbValue}&quot;)</stringProp>
           </elementProp>
         </HTTPSamplerProxy>
         <hashTree>
-          <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="URL redirect PostProcessor">
+          <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="URL redirect PostProcessor" enabled="true">
             <stringProp name="scriptLanguage">groovy</stringProp>
             <stringProp name="parameters"></stringProp>
             <stringProp name="filename"></stringProp>
@@ -6205,7 +6220,7 @@ vars.put(&quot;linking_redirect_path&quot;, redirectPath)
           </JSR223PostProcessor>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="EPR Organisations page">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="EPR Organisations page" enabled="true">
           <stringProp name="TestPlan.comments">EPR Organisations page</stringProp>
           <stringProp name="HTTPSampler.domain">${EPR_FRONTEND_HOST}</stringProp>
           <stringProp name="HTTPSampler.port">${EPR_FRONTEND_PORT}</stringProp>
@@ -6241,7 +6256,7 @@ vars.put(&quot;linking_redirect_path&quot;, redirectPath)
           </RegexExtractor>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="EPR Waste Balance page">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="EPR Waste Balance page" enabled="true">
           <stringProp name="TestPlan.comments">EPR Waste Balance page</stringProp>
           <stringProp name="HTTPSampler.domain">${EPR_FRONTEND_HOST}</stringProp>
           <stringProp name="HTTPSampler.port">${EPR_FRONTEND_PORT}</stringProp>
@@ -6267,7 +6282,7 @@ vars.put(&quot;linking_redirect_path&quot;, redirectPath)
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="EPR Upload Summary Log page">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="EPR Upload Summary Log page" enabled="true">
           <stringProp name="TestPlan.comments">EPR Upload Summary Log page</stringProp>
           <stringProp name="HTTPSampler.domain">${EPR_FRONTEND_HOST}</stringProp>
           <stringProp name="HTTPSampler.port">${EPR_FRONTEND_PORT}</stringProp>
@@ -6282,7 +6297,7 @@ vars.put(&quot;linking_redirect_path&quot;, redirectPath)
           </elementProp>
         </HTTPSamplerProxy>
         <hashTree>
-          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion">
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
             <collectionProp name="Asserion.test_strings">
               <stringProp name="49586">200</stringProp>
             </collectionProp>
@@ -6292,7 +6307,7 @@ vars.put(&quot;linking_redirect_path&quot;, redirectPath)
             <intProp name="Assertion.test_type">2</intProp>
           </ResponseAssertion>
           <hashTree/>
-          <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Extract uploadId">
+          <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Extract uploadId" enabled="true">
             <stringProp name="RegexExtractor.useHeaders">false</stringProp>
             <stringProp name="RegexExtractor.refname">uploadId</stringProp>
             <stringProp name="RegexExtractor.regex">/upload-and-scan/([^&quot;]+)</stringProp>
@@ -6304,7 +6319,7 @@ vars.put(&quot;linking_redirect_path&quot;, redirectPath)
           </RegexExtractor>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="EPR Frontend Upload HTTP Request">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="EPR Frontend Upload HTTP Request" enabled="true">
           <stringProp name="HTTPSampler.domain">${EPR_FRONTEND_HOST}</stringProp>
           <stringProp name="HTTPSampler.port">${EPR_FRONTEND_PORT}</stringProp>
           <stringProp name="HTTPSampler.protocol">${HTTP_PROTOCOL}</stringProp>
@@ -6357,11 +6372,11 @@ vars.put(&quot;page_status&quot;, &quot;NOT_FOUND&quot;)
           </JSR223PostProcessor>
           <hashTree/>
         </hashTree>
-        <WhileController guiclass="WhileControllerGui" testclass="WhileController" testname="Poll Summary Log Upload">
+        <WhileController guiclass="WhileControllerGui" testclass="WhileController" testname="Poll Summary Log Upload" enabled="true">
           <stringProp name="WhileController.condition">${__groovy(vars.get(&quot;page_status&quot;).equals(&quot;NOT_FOUND&quot;) &amp;&amp; vars.getObject(&quot;poll_count&quot;).toInteger() &lt; 60)}</stringProp>
         </WhileController>
         <hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="EPR Summary Log upload confirmation page">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="EPR Summary Log upload confirmation page" enabled="true">
             <stringProp name="TestPlan.comments">EPR Summary Log upload confirmation page</stringProp>
             <stringProp name="HTTPSampler.domain">${EPR_FRONTEND_HOST}</stringProp>
             <stringProp name="HTTPSampler.port">${EPR_FRONTEND_PORT}</stringProp>
@@ -6397,7 +6412,7 @@ vars.put(&quot;page_status&quot;, &quot;NOT_FOUND&quot;)
             </RegexExtractor>
             <hashTree/>
           </hashTree>
-          <ConstantTimer guiclass="ConstantTimerGui" testclass="ConstantTimer" testname="Constant Timer">
+          <ConstantTimer guiclass="ConstantTimerGui" testclass="ConstantTimer" testname="Constant Timer" enabled="true">
             <stringProp name="ConstantTimer.delay">1000</stringProp>
             <stringProp name="TestPlan.comments">Delay between Summary Log status polling</stringProp>
           </ConstantTimer>
@@ -6425,7 +6440,7 @@ vars.put(&quot;uploaded_status&quot;, &quot;NOT_FOUND&quot;)</stringProp>
           </JSR223PostProcessor>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="EPR Summary Log upload submission page">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="EPR Summary Log upload submission page" enabled="true">
           <stringProp name="TestPlan.comments">EPR Summary Log upload submission page</stringProp>
           <stringProp name="HTTPSampler.domain">${EPR_FRONTEND_HOST}</stringProp>
           <stringProp name="HTTPSampler.port">${EPR_FRONTEND_PORT}</stringProp>
@@ -6460,11 +6475,11 @@ vars.put(&quot;uploaded_status&quot;, &quot;NOT_FOUND&quot;)</stringProp>
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
-        <WhileController guiclass="WhileControllerGui" testclass="WhileController" testname="Poll Summary Log Submission Page">
+        <WhileController guiclass="WhileControllerGui" testclass="WhileController" testname="Poll Summary Log Submission Page" enabled="true">
           <stringProp name="WhileController.condition">${__groovy(vars.get(&quot;uploaded_status&quot;).equals(&quot;NOT_FOUND&quot;) &amp;&amp; vars.getObject(&quot;submission_poll_count&quot;).toInteger() &lt; 60)}</stringProp>
         </WhileController>
         <hashTree>
-          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="EPR Summary Log submission confirmation page">
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="EPR Summary Log submission confirmation page" enabled="true">
             <stringProp name="TestPlan.comments">EPR Summary Log submission confirmation page</stringProp>
             <stringProp name="HTTPSampler.domain">${EPR_FRONTEND_HOST}</stringProp>
             <stringProp name="HTTPSampler.port">${EPR_FRONTEND_PORT}</stringProp>
@@ -6524,7 +6539,7 @@ if (status == &quot;NOT_FOUND&quot;) {
           </JSR223PostProcessor>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="EPR GET Create PRN page">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="EPR GET Create PRN page" enabled="true">
           <stringProp name="TestPlan.comments">EPR GET Create PRN page</stringProp>
           <stringProp name="HTTPSampler.domain">${EPR_FRONTEND_HOST}</stringProp>
           <stringProp name="HTTPSampler.port">${EPR_FRONTEND_PORT}</stringProp>
@@ -6539,7 +6554,7 @@ if (status == &quot;NOT_FOUND&quot;) {
           </elementProp>
         </HTTPSamplerProxy>
         <hashTree>
-          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion">
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
             <collectionProp name="Asserion.test_strings">
               <stringProp name="49586">200</stringProp>
             </collectionProp>
@@ -6550,7 +6565,7 @@ if (status == &quot;NOT_FOUND&quot;) {
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="EPR POST Create Draft PRN request">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="EPR POST Create Draft PRN request" enabled="true">
           <stringProp name="TestPlan.comments">EPR POST Create Draft PRN request</stringProp>
           <stringProp name="HTTPSampler.domain">${EPR_FRONTEND_HOST}</stringProp>
           <stringProp name="HTTPSampler.port">${EPR_FRONTEND_PORT}</stringProp>
@@ -6606,7 +6621,7 @@ if (status == &quot;NOT_FOUND&quot;) {
           </elementProp>
         </HTTPSamplerProxy>
         <hashTree>
-          <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="URL redirect PostProcessor">
+          <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="URL redirect PostProcessor" enabled="true">
             <stringProp name="scriptLanguage">groovy</stringProp>
             <stringProp name="parameters"></stringProp>
             <stringProp name="filename"></stringProp>
@@ -6626,7 +6641,7 @@ if (prnIndex &gt;= 0 &amp;&amp; prnIndex + 1 &lt; parts.size()) {
           </JSR223PostProcessor>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="EPR POST View and Create PRN request">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="EPR POST View and Create PRN request" enabled="true">
           <stringProp name="TestPlan.comments">EPR POST View and Create PRN request</stringProp>
           <stringProp name="HTTPSampler.domain">${EPR_FRONTEND_HOST}</stringProp>
           <stringProp name="HTTPSampler.port">${EPR_FRONTEND_PORT}</stringProp>
@@ -6650,7 +6665,7 @@ if (prnIndex &gt;= 0 &amp;&amp; prnIndex + 1 &lt; parts.size()) {
           </elementProp>
         </HTTPSamplerProxy>
         <hashTree>
-          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion">
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
             <collectionProp name="Asserion.test_strings">
               <stringProp name="49586">200</stringProp>
             </collectionProp>
@@ -6661,7 +6676,7 @@ if (prnIndex &gt;= 0 &amp;&amp; prnIndex + 1 &lt; parts.size()) {
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="EPR View PRNs page">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="EPR View PRNs page" enabled="true">
           <stringProp name="TestPlan.comments">EPR View PRNs page</stringProp>
           <stringProp name="HTTPSampler.domain">${EPR_FRONTEND_HOST}</stringProp>
           <stringProp name="HTTPSampler.port">${EPR_FRONTEND_PORT}</stringProp>
@@ -6676,7 +6691,7 @@ if (prnIndex &gt;= 0 &amp;&amp; prnIndex + 1 &lt; parts.size()) {
           </elementProp>
         </HTTPSamplerProxy>
         <hashTree>
-          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion">
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
             <collectionProp name="Asserion.test_strings">
               <stringProp name="49586">200</stringProp>
             </collectionProp>
@@ -6687,7 +6702,7 @@ if (prnIndex &gt;= 0 &amp;&amp; prnIndex + 1 &lt; parts.size()) {
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="EPR Select Created PRN page">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="EPR Select Created PRN page" enabled="true">
           <stringProp name="TestPlan.comments">EPR Select Created PRN page</stringProp>
           <stringProp name="HTTPSampler.domain">${EPR_FRONTEND_HOST}</stringProp>
           <stringProp name="HTTPSampler.port">${EPR_FRONTEND_PORT}</stringProp>
@@ -6702,7 +6717,7 @@ if (prnIndex &gt;= 0 &amp;&amp; prnIndex + 1 &lt; parts.size()) {
           </elementProp>
         </HTTPSamplerProxy>
         <hashTree>
-          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion">
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
             <collectionProp name="Asserion.test_strings">
               <stringProp name="49586">200</stringProp>
             </collectionProp>
@@ -6713,7 +6728,7 @@ if (prnIndex &gt;= 0 &amp;&amp; prnIndex + 1 &lt; parts.size()) {
           </ResponseAssertion>
           <hashTree/>
         </hashTree>
-        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="EPR Issue Selected PRN">
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="EPR Issue Selected PRN" enabled="true">
           <stringProp name="TestPlan.comments">EPR Issue Selected PRN</stringProp>
           <stringProp name="HTTPSampler.domain">${EPR_FRONTEND_HOST}</stringProp>
           <stringProp name="HTTPSampler.port">${EPR_FRONTEND_PORT}</stringProp>
@@ -6737,7 +6752,7 @@ if (prnIndex &gt;= 0 &amp;&amp; prnIndex + 1 &lt; parts.size()) {
           </elementProp>
         </HTTPSamplerProxy>
         <hashTree>
-          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion">
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
             <collectionProp name="Asserion.test_strings">
               <stringProp name="49586">200</stringProp>
             </collectionProp>
@@ -6749,7 +6764,7 @@ if (prnIndex &gt;= 0 &amp;&amp; prnIndex + 1 &lt; parts.size()) {
           <hashTree/>
         </hashTree>
       </hashTree>
-      <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary Report">
+      <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary Report" enabled="true">
         <boolProp name="ResultCollector.error_logging">false</boolProp>
         <objProp>
           <name>saveConfig</name>
