@@ -1,0 +1,14 @@
+version: 2
+
+updates:
+  # Update GitHub Actions
+  - package-ecosystem: github-actions
+    directory: /
+
+    # Schedule run nightly
+    schedule:
+      interval: 'cron'
+      cronjob: '0 0 * * *'
+
+    cooldown:
+      default-days: 3
